@@ -10,12 +10,7 @@ function Sidebar({handleOpenModal, projects,selectHandleProject, selectedProject
         </div>
         <ul className='mt-6'>
           {projects.map((proj)=>{
-            let cssClass = 'w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
-            if(proj.id === selectedProjectID){
-              cssClass += 'bg-stone-800 text-stone-200'
-            }else{
-              cssClass += 'text-stone-400'
-            }
+            let cssClass = 'w-full text-left px-2 py-1 text-stone-400 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800'
             return(
               <li key={proj.id}>
                 <button onClick={() => selectHandleProject(proj.id)} className={cssClass}>{proj.enteredTitle}</button>
