@@ -11,12 +11,11 @@ function MyApp() {
         Task : []
     });
     
-    const hadleClearTask =() =>{
+    const hadleClearTask =(id) =>{
       setOpenProject((prevProject)=>{
         return{
           ...prevProject,
-          setNewProject : undefined,
-          project: prevProject.project.filter((Project)=> Project.id !== prevProject.setNewProject)
+          Task: prevProject.Task.filter((Project)=> Project.id !== id)
         }
       })
     }
@@ -30,7 +29,7 @@ function MyApp() {
         }
         return{
           ...prevProject,
-          Task : [DataTask, ...prevProject.Task]
+          Task : [...prevProject.Task,DataTask]
         }
       })
     }
@@ -77,7 +76,13 @@ function MyApp() {
     }
     const selectProject = openProject.project.find((prev) => prev.id === openProject.setNewProject)
 
-    let context = <SelectedProject project={selectProject} handleDelete={handleDeleteProject} onAdd={handleAddTask} taskProp={openProject.Task}/>; 
+    let context = <SelectedProject 
+    project={selectProject} 
+    handleDelete={handleDeleteProject} 
+    onAdd={handleAddTask} 
+    taskProp={openProject.Task}
+    handleClearTask={hadleClearTask}
+    />; 
 
     if(openProject.setNewProject === null){
       context = <NewProject addProject ={handleSaveProject}/>
