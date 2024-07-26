@@ -10,12 +10,23 @@ function MyApp() {
         project : []
     });
 
+    console.log(openProject)
 
     function handleSelectProject(id) {
       setOpenProject(prevProject=>{
         return{
           ...prevProject,
           setNewProject : id,
+        }
+      })
+    }
+
+    function handleDeleteProject() {
+      setOpenProject((prevProject)=>{
+        return{
+          ...prevProject,
+          setNewProject : undefined,
+          project: prevProject.project.filter((Project)=> Project.id !== prevProject.setNewProject)
         }
       })
     }
@@ -28,8 +39,7 @@ function MyApp() {
         })
     }
 
-    function handleSaveProject(ProjectData){
-      console.log(ProjectData) // check if this is right the object value
+    function handleSaveProject(ProjectData){ 
       setOpenProject((prevProject)=>{
         const Data = {
           ... ProjectData, 
@@ -43,7 +53,7 @@ function MyApp() {
       })
     }
     const selectProject = openProject.project.find((prev) => prev.id === openProject.setNewProject)
-    let context = <SelectedProject project={selectProject}/>; 
+    let context = <SelectedProject project={selectProject} handleDelete={handleDeleteProject}/>; 
     if(openProject.setNewProject === null){
       context = <NewProject addProject ={handleSaveProject}/>
     }else if(openProject.setNewProject === undefined){
