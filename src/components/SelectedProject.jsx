@@ -1,6 +1,7 @@
 import React from 'react'
+import Task from './Task'
 
-function SelectedProject({project,handleDelete}) {
+function SelectedProject({project,handleDelete, onAdd, taskProp}) {
     const dateFormat = new Date(project.enteredDuedate).toLocaleDateString('en-US',{
         year: 'numeric',
         month: 'short',
@@ -17,7 +18,7 @@ function SelectedProject({project,handleDelete}) {
             <p className='mb-4 text-stone-400'>{dateFormat}</p>
             <p className='text-stone-600 whitespace-pre-wrap'>{project.enteredDescribtion}</p>
         </header>
-        TASK
+        <Task onAdd={onAdd} taskProp={taskProp}/>
     </div>
   )
 }
